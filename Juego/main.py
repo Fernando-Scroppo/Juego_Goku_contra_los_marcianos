@@ -2,16 +2,9 @@
 #enconding: utf-8
 #importamos la libreria de pygame y sys; y todos sus modulos.
    #Importamos el archivo player con sus funcionalidades
-#avergaston
+
 import pygame,sys
 from pygame.locals import * 
-
-
--------------------
-if(scroppo==bigoton)
-scroppo es un re bigoton
-scroppo=tragalacteos;
-#ahi te gusta mas??
 
 import player
 
