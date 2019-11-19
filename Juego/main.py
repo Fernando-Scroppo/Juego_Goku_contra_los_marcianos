@@ -8,6 +8,7 @@ from pygame.locals import *
 
 import player
 
+
 pygame.init()   #inicializamos la libreria pygame ¡¡Comando obligatorio!!
 ancho_ventana=600
 alto_ventana=600
@@ -37,4 +38,4 @@ while True:
     ventana.blit(player.image,(player.rect))                       #Colocar la imagen del personaje dentro de nuestra ventana
     
     pygame.display.flip()                             #pygame.display.update() # Comando para ir actualizando la ventana      
-    clock.tick(20)
+    clock.tick(40)
