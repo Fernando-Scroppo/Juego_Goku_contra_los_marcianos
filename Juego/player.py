@@ -48,7 +48,7 @@ class Goku(pygame.sprite.Sprite):
             self.clip(self.stan_volar)
             self.rect.y +=5
 
-        if direction == 'stand_left':            #Despues de apretar cada tecla, vuelve a la posicion inicial
+        if direction == 'stand_left':            #Despues de apretar cada tecla, vuelve al clip seleccionado
             self.clip(self.stan_frenar[0])
         if direction == 'stand_right':
             self.clip(self.stan_frenar[0])
