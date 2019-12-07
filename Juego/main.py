@@ -17,7 +17,7 @@ ventana = pygame.display.set_mode((ancho_ventana,alto_ventana)) # Definimos las 
 pygame.display.set_caption("Goku contra los marcianos") #Colocamos el nombre a la ventana
 color = pygame.Color(87,204,242) #El modulo de pygame Color va con mayuscula
 clock  =pygame.time.Clock() # Controla el tiempo de la animacion
-player = player.Goku((ancho_ventana/2, alto_ventana/2))
+player = player.Goku((56, 324))    #Posicion donde va a iniciar el personaje.
 
 #Mi_Imagen = pygame.image.load("Imagenes/gokus.png")         #Almaceno la imagen completa en una variable
 #Mi_Imagen.convert_alpha()                                   # Comando para sacar el fondo
@@ -35,7 +35,7 @@ while True:
     
     #ventana.fill(color) # El comando fill permite rellenar la ventana, del color que se le mande entre parentesis
     
-
+    print("Bienvenido")
 
     for evento in pygame.event.get():  #Recorremos la lista de eventos predefinida por pygame
         if evento.type == QUIT:        #Si el tipo de eventos que se desarrollo es del tipo QUIT = "Tocar la x de la ventana"
