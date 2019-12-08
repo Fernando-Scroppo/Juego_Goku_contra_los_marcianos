@@ -6,7 +6,7 @@
 
 import pygame,sys
 from pygame.locals import * 
-from time import sleep
+
 #import player
 
 pygame.init()   #inicializamos la libreria pygame ¡¡Comando obligatorio!!
@@ -146,7 +146,7 @@ imagen_fondo = pygame.image.load("Imagenes/Fondo.jpg")
 
 player = Goku((56, 324))    #Posicion donde va a iniciar el personaje
 kame = Kamehameha (120,359)
-
+bandera = 1
 
 #Creamos un bucle infinito donde se va a desarrolar el juego
 
@@ -162,9 +162,9 @@ while True:
             sys.exit()    # Instruccion para cerrar la ventana
         if evento.type == pygame.KEYDOWN:
             if evento.key == K_s:
-                sleep(1)
-                x,y = player.rect.center
-                player.kame(x+30,y-35)
+                if bandera==1:
+                    x,y = player.rect.center   
+                    player.kame(x+30,y-35)
 
     player.handle_event(evento)
     ventana.blit(imagen_fondo,(0,0))                                                      #player.handle_event(event) # Controla los eventos que se dan en el teclado      
@@ -176,8 +176,12 @@ while True:
             x.trayectoria()
 
             if x.rect.left >800:
+                #bandera=1
                 player.listaDisparo.remove(x)
-
+            elif x.rect.left<400:          
+                bandera=0
+            elif x.rect.left<500: #Despues de que el kame supere los 300 pixeles, le va a permitir tirar otro. Si se acerca al final de la ventana, le va a permitir tirar todos los que quiera.
+                bandera=1     
     #kame.dibujar(ventana)                                              #Colocar la imagen del personaje dentro de nuestra ventana
     pygame.display.update() # Comando para ir actualizando la ventana
 
