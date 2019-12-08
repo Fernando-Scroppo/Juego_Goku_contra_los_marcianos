@@ -6,6 +6,7 @@
 
 import pygame,sys
 from pygame.locals import * 
+from time import sleep
 #import player
 
 pygame.init()   #inicializamos la libreria pygame ¡¡Comando obligatorio!!
@@ -37,8 +38,9 @@ class Goku(pygame.sprite.Sprite):
         self.stan_parado = {0: (351,0,55,94)}
         self.stan_volar = {0: (288,0,65,101)}
         self.stan_frenar = {0: (330,106,41,72)}
+        self.stan_kame = {0: (532,271,68,82)}
        
-
+        
 
     def get_frame(self, frame_set):          #Obtenemos los frame y los va recorriendo segun el estado.
         self.frame += 1
@@ -77,7 +79,8 @@ class Goku(pygame.sprite.Sprite):
             self.clip(self.stan_volar[0])
         if direction == 'stand_down':
             self.clip(self.stan_parado[0])
-        
+        if direction == 'posicion_kame':
+            self.clip(self.stan_kame[0])
 
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())   #Coloca el clip en el que se quedo parado
@@ -92,6 +95,8 @@ class Goku(pygame.sprite.Sprite):
                 self.update('up')
             if event.key == pygame.K_DOWN:
                 self.update('down')
+            if event.key == pygame.K_s:
+                self.update('posicion_kame')
             
 
 
@@ -140,7 +145,7 @@ class Kamehameha(pygame.sprite.Sprite):
 imagen_fondo = pygame.image.load("Imagenes/Fondo.jpg")  
 
 player = Goku((56, 324))    #Posicion donde va a iniciar el personaje
-kame = Kamehameha (106,359)
+kame = Kamehameha (120,359)
 
 
 #Creamos un bucle infinito donde se va a desarrolar el juego
@@ -157,8 +162,9 @@ while True:
             sys.exit()    # Instruccion para cerrar la ventana
         if evento.type == pygame.KEYDOWN:
             if evento.key == K_s:
+                sleep(1)
                 x,y = player.rect.center
-                player.kame(x,y)
+                player.kame(x+30,y-35)
 
     player.handle_event(evento)
     ventana.blit(imagen_fondo,(0,0))                                                      #player.handle_event(event) # Controla los eventos que se dan en el teclado      
