@@ -180,7 +180,7 @@ while True:
                 player.listaDisparo.remove(x)
             elif x.rect.left<400:          
                 bandera=0
-            elif x.rect.left<500: #Despues de que el kame supere los 300 pixeles, le va a permitir tirar otro. Si se acerca al final de la ventana, le va a permitir tirar todos los que quiera.
+            elif x.rect.left<500: #Despues de que el kame supere los 500 pixeles, le va a permitir tirar otro. Si se acerca al final de la ventana, le va a permitir tirar todos los que quiera.
                 bandera=1     
     #kame.dibujar(ventana)                                              #Colocar la imagen del personaje dentro de nuestra ventana
     pygame.display.update() # Comando para ir actualizando la ventana
