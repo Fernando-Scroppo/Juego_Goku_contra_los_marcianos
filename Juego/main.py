@@ -133,6 +133,23 @@ class Kamehameha(pygame.sprite.Sprite):
         superficie.blit(self.imageKame,self.rect)
 
 
+# Editar la clase marciano, para generar los invasores
+class Marciano(pygame.sprite.Sprite):
+    def __init__(self,posx,posy):
+        pygame.sprite.Sprite.__init__(self)
+        # Atributos
+        # BUSCAR IMAGENES PARA EL MARCIANO ENEMIGO
+        self.imageMarciano = pygame.image.load('Imagenes/marciano volador.png')
+        self.rect = self.imageMarciano.get_rect()
+        self.listaDisparo = []
+        self.velocidad = 20
+        self.rect.top = posy
+        self.rect.left = posx
+
+
+    def dibujar(self,superficie):
+        superficie.blit(self.imageMarciano,self.rect) 
+
 
 
 #Mi_Imagen = pygame.image.load("Imagenes/gokus.png")         #Almaceno la imagen completa en una variable
@@ -146,6 +163,7 @@ imagen_fondo = pygame.image.load("Imagenes/Fondo.jpg")
 
 player = Goku((56, 324))    #Posicion donde va a iniciar el personaje
 kame = Kamehameha (120,359)
+enemigo = Marciano(700,100)
 bandera = 1
 
 #Creamos un bucle infinito donde se va a desarrolar el juego
@@ -169,7 +187,7 @@ while True:
     player.handle_event(evento)
     ventana.blit(imagen_fondo,(0,0))                                                      #player.handle_event(event) # Controla los eventos que se dan en el teclado      
     ventana.blit(player.image,(player.rect))
-
+    enemigo.dibujar(ventana)
     if len(player.listaDisparo)>0:
         for x in player.listaDisparo:
             x.dibujar(ventana)
