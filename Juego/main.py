@@ -139,18 +139,35 @@ class Marciano(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # Atributos
         # BUSCAR IMAGENES PARA EL MARCIANO ENEMIGO
-        self.imageMarciano = pygame.image.load('Imagenes/marciano volador.png')
+        self.imageMarciano1 = pygame.image.load('Imagenes/Saibaman A1 .png')
+        self.imageMarciano2 = pygame.image.load('Imagenes/Saibaman A2.png')
+
+        self.listaImagenes = [self.imageMarciano1, self.imageMarciano2]
+        self.posImagen = 0   # Para que por defecto sea la imagen 1, la que aparesca primero.
+
+        self.imageMarciano = self.listaImagenes[self.posImagen]  
         self.rect = self.imageMarciano.get_rect()
+
         self.listaDisparo = []
         self.velocidad = 20
         self.rect.top = posy
         self.rect.left = posx
 
+        self.tiempoCambio = 1  #Atributo para cambiar la imagen.
+
 
     def dibujar(self,superficie):
+        self.imageMarciano = self.listaImagenes[self.posImagen]
         superficie.blit(self.imageMarciano,self.rect) 
 
+    def comportamiento(self,tiempo):
+        print(tiempo)
+        if self.tiempoCambio == round (tiempo):
+            self.posImagen +=1
+            self.tiempoCambio +=1
 
+            if self.posImagen > len(self.listaImagenes)-1:  #Este condicional es que para ver si llego a la ultima imagen de la lista, que se regrese.
+                self.posImagen = 0
 
 #Mi_Imagen = pygame.image.load("Imagenes/gokus.png")         #Almaceno la imagen completa en una variable
 #Mi_Imagen.convert_alpha()                                   # Comando para sacar el fondo
@@ -166,14 +183,20 @@ kame = Kamehameha (120,359)
 enemigo = Marciano(700,100)
 bandera = 1
 
+reloj = pygame.time.Clock()
+
 #Creamos un bucle infinito donde se va a desarrolar el juego
 
 while True:
     
+    reloj.tick(60)
+
     #ventana.fill(color) # El comando fill permite rellenar la ventana, del color que se le mande entre parentesis
     
     kame.trayectoria()
 
+    tiempo = pygame.time.get_ticks()/1000
+    #print (tiempo)
     for evento in pygame.event.get():  #Recorremos la lista de eventos predefinida por pygame
         if evento.type == QUIT:        #Si el tipo de eventos que se desarrollo es del tipo QUIT = "Tocar la x de la ventana"
             pygame.quit() #Instruccion para detener todos los modulos de pygame             
@@ -184,8 +207,12 @@ while True:
                     x,y = player.rect.center   
                     player.kame(x+30,y-35)
 
-    player.handle_event(evento)
-    ventana.blit(imagen_fondo,(0,0))                                                      #player.handle_event(event) # Controla los eventos que se dan en el teclado      
+    player.handle_event(evento)          #player.handle_event(event) # Controla los eventos que se dan en el teclado
+    ventana.blit(imagen_fondo,(0,0))       
+
+    enemigo.comportamiento(tiempo)
+    
+                                                    
     ventana.blit(player.image,(player.rect))
     enemigo.dibujar(ventana)
     if len(player.listaDisparo)>0:
@@ -204,4 +231,4 @@ while True:
     pygame.display.update() # Comando para ir actualizando la ventana
 
                                        
-    clock.tick(60)
+    
